@@ -150,9 +150,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   score: 0
   maxHeight: 0
+  previousMaxHeight: 0
+  levelSpacing: 30
   ball: {fileID: 1111670256}
   isTrackingBall: 1
   gameCamera: {fileID: 519420028}
+  levelPrefabs:
+  - {fileID: 6331914134188170976, guid: 65f7e81bdf5036f4b80eff2bee31578f, type: 3}
+  - {fileID: 647963674163148003, guid: e36e1a9cc11299b46a1578f9d36ed07c, type: 3}
+  - {fileID: 3389526934460179905, guid: 445b028c97aa00a4398b469be58dfdb8, type: 3}
+  - {fileID: 1881103816547937613, guid: f1b7e0391dfdbaa4f895f34246cce188, type: 3}
+  levels: []
 --- !u!4 &138684762
 Transform:
   m_ObjectHideFlags: 0
