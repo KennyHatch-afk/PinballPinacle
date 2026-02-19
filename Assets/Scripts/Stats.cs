@@ -39,15 +39,15 @@ public class Stats : MonoBehaviour
         LifeCounter.GetComponent<TextMeshProUGUI>().text = "Lives: " + lives;
 
         //Decrease invincibility timer and set the ball back to active if done
-        if (invincibilityTime > 0)
-        {
-            invincibilityTime -= Time.deltaTime;
+        // if (invincibilityTime > 0)
+        // {
+        //     invincibilityTime -= Time.deltaTime;
 
-            if(invincibilityTime < 0)
-            {
-                ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            }
-        }
+        //     if(invincibilityTime < 0)
+        //     {
+        //        ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        //     }
+        // }
 
         //If the ball is out of bounds, decrease lives, give it a new position in play, and setup invincibility timer
         if (ball.transform.position.y < maxHeight - 31)
@@ -55,12 +55,17 @@ public class Stats : MonoBehaviour
             if (!isDebugModeOn)
             {
                 lives--;
+
             }
 
             ball.transform.SetLocalPositionAndRotation(new Vector3(ball.transform.position.x, maxHeight, ball.transform.position.z), ball.transform.rotation);
+            
+            // make sure the ball does not keep previous velocity
+            ball.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 
-            ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            invincibilityTime = 3;
+            //invincibilityTime = 3;      
+                      
+            GameManager.Pause();
         }
 
         //Set the score and max height if less than the ball's current position
