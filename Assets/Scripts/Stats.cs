@@ -38,9 +38,9 @@ public class Stats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(lives <= 0)
+        if (lives <= 0)
         {
-            if(Mouse.current.leftButton.wasPressedThisFrame)
+            if (Mouse.current.leftButton.wasPressedThisFrame)
             //Restart game when mouse is pressed
             {
                 ball.SetActive(true);
@@ -68,15 +68,15 @@ public class Stats : MonoBehaviour
         lifeCounter.GetComponent<TextMeshProUGUI>().text = "Lives: " + lives;
 
         //Decrease invincibility timer and set the ball back to active if done
-        if (invincibilityTime > 0)
-        {
-            invincibilityTime -= Time.deltaTime;
+        // if (invincibilityTime > 0)
+        // {
+        //     invincibilityTime -= Time.deltaTime;
 
-            if(invincibilityTime < 0)
-            {
-                ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            }
-        }
+        //     if(invincibilityTime < 0)
+        //     {
+        //        ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        //     }
+        // }
 
         //If the ball is out of bounds, decrease lives, give it a new position in play, and setup invincibility timer
         if (ball.transform.position.y < maxHeight - 31)
@@ -84,6 +84,7 @@ public class Stats : MonoBehaviour
             if (!isDebugModeOn)
             {
                 lives--;
+
             }
 
             //Game Over
@@ -100,10 +101,14 @@ public class Stats : MonoBehaviour
             //Respawn
             {
                 ball.transform.SetLocalPositionAndRotation(new Vector3(ball.transform.position.x, maxHeight, ball.transform.position.z), ball.transform.rotation);
+                // make sure the ball does not keep previous velocity
+                ball.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
 
-                ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-                invincibilityTime = 1;
+                //invincibilityTime = 3;      
+
+                GameManager.Pause();
             }
+
         }
 
         //Set the score and max height if less than the ball's current position
@@ -122,7 +127,7 @@ public class Stats : MonoBehaviour
         }
 
         //Spawn new levels if close enough
-        if(maxHeight > previousMaxHeight  + levelSpacing)
+        if (maxHeight > previousMaxHeight + levelSpacing)
         {
             previousMaxHeight = maxHeight;
 
