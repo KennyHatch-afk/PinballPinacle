@@ -141,5 +141,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481d8c350feb5844aaf0ab5d6087435f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BouncePad
-  repelStrength: 2000
-  scaleSpeed: 120
+  repelStrength: 10000
+  scaleSpeed: 200

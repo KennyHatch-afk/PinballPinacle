@@ -20,12 +20,10 @@ public class Stats : MonoBehaviour
     public GameObject lifeCounter;
     public GameObject gameOverText;
     public GameObject gameOverScore;
-    public float invincibilityTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        invincibilityTime = 0;
         lives = 3;
         maxHeight = ball.transform.position.y;
         previousMaxHeight = maxHeight;
@@ -67,17 +65,6 @@ public class Stats : MonoBehaviour
         scoreCounter.GetComponent<TextMeshProUGUI>().text = "Score: " + Mathf.FloorToInt(score);
         lifeCounter.GetComponent<TextMeshProUGUI>().text = "Lives: " + lives;
 
-        //Decrease invincibility timer and set the ball back to active if done
-        // if (invincibilityTime > 0)
-        // {
-        //     invincibilityTime -= Time.deltaTime;
-
-        //     if(invincibilityTime < 0)
-        //     {
-        //        ball.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        //     }
-        // }
-
         //If the ball is out of bounds, decrease lives, give it a new position in play, and setup invincibility timer
         if (ball.transform.position.y < maxHeight - 31)
         {
@@ -114,7 +101,6 @@ public class Stats : MonoBehaviour
         //Set the score and max height if less than the ball's current position
         if (maxHeight < ball.transform.position.y)
         {
-            Debug.Log(score);
             score += ball.transform.position.y - maxHeight;
 
             maxHeight = ball.transform.position.y;
