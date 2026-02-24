@@ -87,11 +87,23 @@ public class Stats : MonoBehaviour
             else
             //Respawn
             {
-                ball.transform.SetLocalPositionAndRotation(new Vector3(ball.transform.position.x, maxHeight, ball.transform.position.z), ball.transform.rotation);
+                Vector3 spawnTarget = new Vector3(-3, 3, 0); 
+                GameObject[] currentPaddles =  GameObject.FindGameObjectsWithTag("Paddle");
+
+                for (int i = 0; i < currentPaddles.Length; i++)
+                {
+                    GameObject g = currentPaddles[i];
+
+                    if(g.transform.position.y > spawnTarget.y && g.transform.position.y <= maxHeight)
+                    {
+                        spawnTarget = g.transform.position;
+                    }
+                }
+
+                ball.transform.SetLocalPositionAndRotation(new Vector3(spawnTarget.x, spawnTarget.y + 1.5f, spawnTarget.z), ball.transform.rotation);
+
                 // make sure the ball does not keep previous velocity
                 ball.GetComponent<Rigidbody2D>().linearVelocity = Vector3.zero;
-
-                //invincibilityTime = 3;      
 
                 GameManager.Pause();
             }
