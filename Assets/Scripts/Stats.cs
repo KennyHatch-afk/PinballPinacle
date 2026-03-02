@@ -20,10 +20,15 @@ public class Stats : MonoBehaviour
     public GameObject lifeCounter;
     public GameObject gameOverText;
     public GameObject gameOverScore;
+    public float sceneWidth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        float unitsPerPixel = sceneWidth / Screen.width;
+        float desiredHalfHeight = (unitsPerPixel * Screen.height) /2f;
+        gameCamera.GetComponent<Camera>().orthographicSize = desiredHalfHeight;
+
         lives = 3;
         maxHeight = ball.transform.position.y;
         previousMaxHeight = maxHeight;
