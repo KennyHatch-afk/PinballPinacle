@@ -1,8 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BouncePad : MonoBehaviour
 {
+    public UnityEvent onBounce;
 
     [SerializeField]
     float repelStrength;
@@ -22,6 +24,8 @@ public class BouncePad : MonoBehaviour
     {
         startScale = transform.localScale;
         desiredScale = startScale * 2;
+
+        onBounce.AddListener(GameObject.FindGameObjectWithTag("GameController").GetComponent<Stats>().bounceScore);
     }
 
     // Update is called once per frame
@@ -63,6 +67,8 @@ public class BouncePad : MonoBehaviour
         // apply force to other collider
         collision.rigidbody.AddForce(dir * repelStrength);
         Debug.Log("Applied Force " + dir);
+
+        onBounce.Invoke();
     }
 
 }

@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Stats : MonoBehaviour
 {
-    public float score;
+    public int score;
+    public float displayedMaxHeight;
     public int lives;
     public bool isDebugModeOn;
     public float maxHeight;
@@ -18,8 +20,10 @@ public class Stats : MonoBehaviour
     public List<GameObject> levels;
     public GameObject scoreCounter;
     public GameObject lifeCounter;
+    public GameObject maxHeightCounter;
     public GameObject gameOverText;
     public GameObject gameOverScore;
+    public GameObject gameOverMaxHeight;
     public float sceneWidth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -49,9 +53,13 @@ public class Stats : MonoBehaviour
                 ball.SetActive(true);
                 scoreCounter.SetActive(true);
                 lifeCounter.SetActive(true);
+                maxHeightCounter.SetActive(true);
                 gameOverText.SetActive(false);
                 gameOverScore.SetActive(false);
+                gameOverMaxHeight.SetActive(false);
+                displayedMaxHeight = 0;
                 score = 0;
+                
                 lives = 3;
                 ball.transform.SetLocalPositionAndRotation(new Vector3(-3, 5, 0), ball.transform.rotation);
                 maxHeight = ball.transform.position.y;
@@ -67,8 +75,9 @@ public class Stats : MonoBehaviour
             }
         }
 
-        scoreCounter.GetComponent<TextMeshProUGUI>().text = "Score: " + Mathf.FloorToInt(score);
+        scoreCounter.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
         lifeCounter.GetComponent<TextMeshProUGUI>().text = "Lives: " + lives;
+        maxHeightCounter.GetComponent<TextMeshProUGUI>().text = "Max Height: " + Mathf.FloorToInt(displayedMaxHeight);
 
         //If the ball is out of bounds, decrease lives, give it a new position in play, and setup invincibility timer
         if (ball.transform.position.y < maxHeight - 31)
@@ -85,9 +94,11 @@ public class Stats : MonoBehaviour
                 ball.SetActive(false);
                 scoreCounter.SetActive(false);
                 lifeCounter.SetActive(false);
+                maxHeightCounter.SetActive(false);
                 gameOverText.SetActive(true);
                 gameOverScore.SetActive(true);
-                gameOverScore.GetComponent<TextMeshProUGUI>().text = "Score: " + Mathf.FloorToInt(score);
+                gameOverScore.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
+                gameOverMaxHeight.GetComponent<TextMeshProUGUI>().text = "Max Height: " + Mathf.FloorToInt(displayedMaxHeight);
             }
             else
             //Respawn
@@ -118,7 +129,7 @@ public class Stats : MonoBehaviour
         //Set the score and max height if less than the ball's current position
         if (maxHeight < ball.transform.position.y)
         {
-            score += ball.transform.position.y - maxHeight;
+            displayedMaxHeight += ball.transform.position.y - maxHeight;
 
             maxHeight = ball.transform.position.y;
         }
@@ -138,5 +149,10 @@ public class Stats : MonoBehaviour
 
             levels.Add(Instantiate(levelPrefabs[rand], new Vector3(0, ball.transform.position.y + 12, ball.transform.position.z), Quaternion.identity));
         }
+    }
+
+    public void bounceScore()
+    {
+        score += 100;
     }
 }
