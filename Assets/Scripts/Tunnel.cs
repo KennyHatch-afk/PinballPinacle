@@ -5,15 +5,11 @@ public class Tunnel : MonoBehaviour
 
     [SerializeField]
     private Tunnel exitPoint;
-
     [SerializeField]
     private float exitForce;
-
     private Rigidbody2D storedBall;
-
     private bool isActive;
     private bool isHoldingBall;
-
     public float teleportTime;
     private float waitTime;
     private float timer;
@@ -51,7 +47,8 @@ public class Tunnel : MonoBehaviour
         rb.position = exitPoint.transform.position;
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(exitPoint.transform.up * exitForce);
-        rb.transform.localScale = Vector2.one;
+        rb.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        storedBall.constraints = RigidbodyConstraints2D.None;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -60,7 +57,10 @@ public class Tunnel : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             storedBall = collision.GetComponent<Rigidbody2D>();
+
             storedBall.transform.localScale = Vector2.zero;
+
+            storedBall.constraints = RigidbodyConstraints2D.FreezeAll;
 
             isHoldingBall = true;
 
