@@ -2461,6 +2461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   ball: {fileID: 1111670256}
   lastPause: 0
+  blinkNum: 0
   pauseTime: 0
 --- !u!1 &2104163128
 GameObject:

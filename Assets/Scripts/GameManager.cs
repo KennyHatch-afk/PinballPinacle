@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static bool isPaused;
     public GameObject ball;
     public float lastPause;
+    public int blinkNum;
     public float pauseTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     {
         isPaused = false;
         pauseTime = 0;
+        blinkNum = 0;
+        Pause();
     }
 
     // Update is called once per frame
@@ -24,7 +27,8 @@ public class GameManager : MonoBehaviour
             if(pauseTime < 0)
             {
                 lastPause = Time.unscaledTime;
-                pauseTime = 2.0f;
+                pauseTime = 5.0f;
+                blinkNum++;
 
                 if (ball.activeSelf)
                 {
@@ -36,14 +40,13 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            if (Mouse.current.leftButton.isPressed)
+            if (blinkNum > 10)
             {
+                blinkNum = 0;
                 ball.SetActive(true);
                 UnPause();
             }
         }
-
-        if (Mouse.current.leftButton.isPressed && isPaused) UnPause();
     }
 
     public static void Pause()
