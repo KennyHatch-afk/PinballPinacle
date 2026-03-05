@@ -34,6 +34,7 @@ public class Coin : MonoBehaviour
             // Instantiate text as child of canvas
             GameObject textObj = Instantiate(textPrefab, canvas.transform);
             textObj.transform.position = transform.position;
+            Stats.bounceScore();
 
             Destroy(gameObject);
         }

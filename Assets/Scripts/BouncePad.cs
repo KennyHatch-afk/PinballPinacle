@@ -25,7 +25,7 @@ public class BouncePad : MonoBehaviour
         startScale = transform.localScale;
         desiredScale = startScale * 2;
 
-        onBounce.AddListener(GameObject.FindGameObjectWithTag("GameController").GetComponent<Stats>().bounceScore);
+        onBounce.AddListener(Stats.bounceScore);
     }
 
     // Update is called once per frame

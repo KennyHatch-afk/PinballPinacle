@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class Stats : MonoBehaviour
 {
-    public int score;
+    public static int score;
     public float displayedMaxHeight;
     public int lives;
     public bool isDebugModeOn;
@@ -151,7 +151,7 @@ public class Stats : MonoBehaviour
         }
     }
 
-    public void bounceScore()
+    public static void bounceScore()
     {
         score += 100;
     }
