@@ -58,11 +58,8 @@ public class BouncePad : MonoBehaviour
     {
         scalePad = true;
 
-        Vector2 dir = collision.rigidbody.linearVelocity;
+        Vector2 dir = collision.transform.position - transform.position;
         dir.Normalize();
-
-        // flip the direction (only in Y)
-        dir.y *= -1;
 
         // apply force to other collider
         collision.rigidbody.AddForce(dir * repelStrength);

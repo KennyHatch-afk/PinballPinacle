@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,7 +20,7 @@ public class GameManager : MonoBehaviour
     {
         if(isPaused)
         {
-            pauseTime -= (Time.unscaledTime - lastPause);
+            pauseTime -= Time.unscaledTime - lastPause;
             if(pauseTime < 0)
             {
                 lastPause = Time.unscaledTime;
