@@ -97,6 +97,7 @@ public class Stats : MonoBehaviour
                 maxHeightCounter.SetActive(false);
                 gameOverText.SetActive(true);
                 gameOverScore.SetActive(true);
+                gameOverMaxHeight.SetActive(true);
                 gameOverScore.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
                 gameOverMaxHeight.GetComponent<TextMeshProUGUI>().text = "Max Height: " + Mathf.FloorToInt(displayedMaxHeight);
             }
